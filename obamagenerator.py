@@ -18,11 +18,12 @@ def makememe():
             break
 
     memegenerator.make_meme(content[:breakIndex], content[breakIndex + 1:], filename)
-
+    '''
     imageStr = ""
     with open("temp.png", "rb") as imageFile:
         imageStr = base64.b64encode(imageFile.read())
     return imageStr
+    '''
 
 def getContent():
     markov = requests.get('http://talk-to-obama.herokuapp.com/chat?size=tweet')
