@@ -68,7 +68,7 @@ def get_lower(somedata):
 	try:
 		result = somedata.decode("utf-8").lower()
 	except:
-		result = somedata.lower()		
+		result = somedata.lower()
 
 	return result
 
@@ -104,7 +104,6 @@ if __name__ == '__main__':
 		# too intense
 		print('to many argz')
 
-	print(meme)	
+	print(meme)
 	filename = str(meme)+'.jpg'
-	make_meme(topString, bottomString, filename)	
-
+	make_meme(topString, bottomString, filename)
