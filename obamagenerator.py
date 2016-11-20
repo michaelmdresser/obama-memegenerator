@@ -5,9 +5,10 @@ import memegenerator, os, random, requests, base64
 #app = Flask(__name__)
 #CORS(app)
 
-def makememe():
-    filename = "./templates/"
-    filename += random.choice(os.listdir("./templates"))
+def makememe(outputname="temp.png"):
+    filename = ""
+    while filename == "" or filename == "./templates/.DS_Store":
+        filename = "./templates/" + random.choice(os.listdir("./templates"))
 
     content = getContent()
     contentLength = len(content)
@@ -17,7 +18,7 @@ def makememe():
             breakIndex = i
             break
 
-    memegenerator.make_meme(content[:breakIndex], content[breakIndex + 1:], filename)
+    memegenerator.make_meme(content[:breakIndex], content[breakIndex + 1:], filename, outputname)
     '''
     imageStr = ""
     with open("temp.png", "rb") as imageFile:
@@ -31,7 +32,10 @@ def getContent():
     content = markovDictionary["content"]
     return content
 
-makememe()
+
+if __name__ == "__main__":
+    for i in range(0, 100):
+        makememe(outputname="temp" + str(i) + ".png")
 
 '''
 @app.route('/makememe', methods=["GET", "OPTIONS"])
