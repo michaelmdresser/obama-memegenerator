@@ -1,4 +1,9 @@
 import memegenerator, os, random, requests, base64
+from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
+
+app = Flask(__name__)
+CORS(app)
 
 def makememe():
     filename = "./templates/"
@@ -17,7 +22,6 @@ def makememe():
     imageStr = ""
     with open("temp.png", "rb") as imageFile:
         imageStr = base64.b64encode(imageFile.read())
-    print imageStr
     return imageStr
 
 def getContent():
@@ -26,4 +30,13 @@ def getContent():
     content = markovDictionary["content"]
     return content
 
-makememe()
+@app.route('/makememe', methods=["GET", "OPTIONS"])
+@cross_origin()
+def index():
+    return jsonify({
+        "content": makememe()
+    })
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
