@@ -47,6 +47,8 @@ def make_meme(topString, bottomString, filename, outputname="temp.png"):
 	draw.text(topTextPosition, topString, (255,255,255), font=font)
 	draw.text(bottomTextPosition, bottomString, (255,255,255), font=font)
 
+	if not os.path.exists("generated"):
+    	os.makedirs("generated")
 	img.save("generated/" + outputname)
 
 def get_upper(somedata):
