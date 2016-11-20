@@ -5,7 +5,7 @@ from PIL import ImageFont
 from PIL import Image
 from PIL import ImageDraw
 
-import sys
+import sys, os
 
 
 def make_meme(topString, bottomString, filename, outputname="temp.png"):
@@ -48,7 +48,7 @@ def make_meme(topString, bottomString, filename, outputname="temp.png"):
 	draw.text(bottomTextPosition, bottomString, (255,255,255), font=font)
 
 	if not os.path.exists("generated"):
-    	os.makedirs("generated")
+		os.makedirs("generated")
 	img.save("generated/" + outputname)
 
 def get_upper(somedata):
